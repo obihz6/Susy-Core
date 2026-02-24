@@ -7,6 +7,7 @@ import static supersymmetry.api.util.SuSyUtility.susyId;
 import java.util.ArrayList;
 import java.util.function.Function;
 
+import net.minecraftforge.event.entity.living.BabyEntitySpawnEvent;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.items.CapabilityItemHandler;
 
@@ -43,6 +44,7 @@ import supersymmetry.common.metatileentities.logistics.MetaTileEntityExtender;
 import supersymmetry.common.metatileentities.multi.electric.*;
 import supersymmetry.common.metatileentities.multi.electric.strand.*;
 import supersymmetry.common.metatileentities.multi.primitive.MetaTileEntityCoagulationTank;
+import supersymmetry.common.metatileentities.multi.primitive.MetaTileEntityCupolaFurnace;
 import supersymmetry.common.metatileentities.multi.primitive.MetaTileEntityPrimitiveMudPump;
 import supersymmetry.common.metatileentities.multi.primitive.MetaTileEntityPrimitiveSmelter;
 import supersymmetry.common.metatileentities.multi.rocket.*;
@@ -76,6 +78,8 @@ public class SuSyMetaTileEntities {
 
     public static CatalystMachineMetaTileEntity[] VULCANIZING_PRESS;
     public static SuSySimpleSteamMetaTileEntity[] STEAM_VULCANIZING_PRESS;
+
+    public static SuSySimpleSteamMetaTileEntity[] STEAM_BATCH_REACTOR;
 
     public static CatalystMachineMetaTileEntity[] ROASTER;
     public static SuSySimpleSteamMetaTileEntity[] STEAM_ROASTER;
@@ -190,6 +194,8 @@ public class SuSyMetaTileEntities {
     public static MetaTileEntityPrimitiveSmelter PRIMITIVE_SMELTER;
     public static MetaTileEntityPrimitiveItemBus PRIMITIVE_ITEM_IMPORT;
     public static MetaTileEntityPrimitiveItemBus PRIMITIVE_ITEM_EXPORT;
+
+    public static MetaTileEntityCupolaFurnace CUPOLA_FURNACE;
 
     // Space multis
     public static MetaTileEntityLandingPad LANDING_PAD;
@@ -357,6 +363,8 @@ public class SuSyMetaTileEntities {
                 SuSyRecipeMaps.BUBBLE_COLUMN_REACTOR_RECIPES, SusyTextures.BUBBLE_COLUMN_REACTOR_OVERLAY, true,
                 SuSyUtility.reactorTankSizeFunction);
 
+        registerSimpleSteamMTE(STEAM_BATCH_REACTOR, 20000, "batch_reactor", SuSyRecipeMaps.BATCH_REACTOR_RECIPES,
+                SuSySteamProgressIndicators.ARROW, SusyTextures.BATCH_REACTOR_OVERLAY, false);
         registerSimpleMTE(BATCH_REACTOR, 12, 14681, "batch_reactor", SuSyRecipeMaps.BATCH_REACTOR_RECIPES,
                 SusyTextures.BATCH_REACTOR_OVERLAY, true, SuSyUtility.reactorTankSizeFunction);
 
@@ -422,6 +430,9 @@ public class SuSyMetaTileEntities {
                 new MetaTileEntityPrimitiveItemBus(susyId("primitive_item_import"), false));
         PRIMITIVE_ITEM_EXPORT = registerMetaTileEntity(14802,
                 new MetaTileEntityPrimitiveItemBus(susyId("primitive_item_export"), true));
+
+        CUPOLA_FURNACE = registerMetaTileEntity(14850,
+                new MetaTileEntityCupolaFurnace(susyId("cupola_furnace")));
 
         // oil stuff
         COKING_TOWER = registerMetaTileEntity(14635, new MetaTileEntityCokingTower(susyId("coking_tower")));
